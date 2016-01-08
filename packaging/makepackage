@@ -1,0 +1,53 @@
+#!/bin/sh
+
+
+# Check if checkinstall is available and configured
+
+which checkinstall >/dev/null
+if [ $? -ne 0 ]; 
+then
+	echo  "\nERROR: checkinstall not installed or not in PATH. Aborting.\n\n"
+	exit 1
+fi
+
+
+# prepare doumentation
+## description-pak
+if [ ! -r description-pak ]
+then
+	echo  "\nERROR: no description-pak file found. Aborting.\n\n"
+	exit 2
+fi 
+
+if [ ! -d doc-pak ]
+then
+	echo  "\nERROR: no doc-pak directory found. Aborting.\n\n"
+	exit 3
+fi 
+
+cp ../README.md doc-pac/
+
+
+# Set versionnumber
+
+## are we releasing?
+if [ -z "$1" ];
+then
+	### No: get the release number wherer from?
+	VERSIONNUMBER=`date +%Y%m%d`
+	RELEASE="test-`date +%H%M%S`"
+else
+	if [ "$1" == "release" ];
+	then
+		### Yes: get the version number from the git tag
+		VERSIONNUMBER=`echo todo`
+	else
+		echo "\n\nERROR: parameter only allows \"release\" as optional value."
+	fi
+
+fi
+
+
+# Build debian package
+
+checkinstall -D --pkgname hp-spectre-x360-modeswitcher --pkgversion $VERSIONNUMBER --pkgrelease $RELEASE --pkglicense GPLv3 --requires "xinput,x11-xserver-utils,libnotify-bin,bsdutils,coreutils,mawk,debianutils,dash" --pkgsource "https://github.com/hp-spectre-x360-modeswitcher" --pkgaltsource "none" --maintainer "develop@myprs.de" --pkggroup "myprs" --arch "all" ./install.sh
