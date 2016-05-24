@@ -1,5 +1,3 @@
-# HP-Spectre-x360-Modeswitcher
-
 This software is for use on HP Spectre x360 convertible laptops. You can use the device as a laptop as you would expect, but also you can flip over your display and use it as a tablet. HP calls the two states Laptop-Mode and Tablet-Mode.
 
 Ubuntu 10.15 already is partially aware of this. If you enter Tablet-Mode, the keyboard is deactivated and the keyboard lights are switched off. To get the Tablet-Mode really working it requires some more tasks:
@@ -18,7 +16,7 @@ Of course these changes have to be reverted when switching back.
 This software contains mainly two parts: 
 
 1. A boot script to register the keys that indicate flip activity and hook the events to script actions
-2. A bash script including a little infrastructure which is run on the flipping events. It comes with the scripts to flip the screen and disable the keypad but you can hook your own scripts into it easily. 
+2. A bash script including a little infrastructure which is run on the flipping events. It comes with the scripts to flip the screen and disable the keypad but you can hook your own scripts int it easily. 
 
 
 Useful links:

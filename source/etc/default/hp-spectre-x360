@@ -1,0 +1,15 @@
+## this is a script for the HP spectre 360 convertible mode switcher
+## this script flips the screen into the configured orientation in tablet mode
+
+## variables for flipscreen.sh
+##
+## change these values if you want a different behaviour or have a differet display name
+##
+# XRANDR_DISPLAYNAME="eDP1"
+# XRANDR_LPTP_ROTATION="normal"
+# XRANDR_TBLT_ROTATION="inverted"
+
+# Set this variable to the name of the touchpad device.
+# this will override auto detection
+#
+# TOUCHDEV="SynPS/2 Synaptics TouchPad"
