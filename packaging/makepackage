@@ -41,6 +41,21 @@ else
 	then
 		### Yes: get the version number from the git tag
 		VERSIONNUMBER=`echo todo`
+
+		## are we inside a git repository?
+
+		## is the git index clean? (everything is commited
+		## git status -s ; wc -l  must return zero lines ( -eq 0 )
+
+
+		## get the commit ID of the working dir
+		## git show  |  mawk '/^commit / { print $2 }'
+
+
+		## do we have a tag conforming to the syntax
+		## 
+
+
 	else
 		echo "\n\nERROR: parameter only allows \"release\" as optional value."
 	fi
