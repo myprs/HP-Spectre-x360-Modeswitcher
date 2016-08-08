@@ -11,8 +11,14 @@ cd "$CONFDIR"/laptop-mode
 #ln -s ../script.d/template.sh 00-template 
 rm 01-touchpad 
 rm 02-flipscreen 
+rmdir "$CONFDIR"/laptop-mode
 
 cd "$CONFDIR"/tablet-mode
 rm 01-touchpad 
 rm 02-flipscreen 
+rmdir "$CONFDIR"/tablet-mode
+
+
+
+exit 0
 

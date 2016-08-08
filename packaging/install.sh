@@ -30,8 +30,6 @@ function cleanup () {
 echo "DEBUG: create /etc structures"
 
 mkdir -p "$CONFDIR/script.d"
-mkdir -p "$CONFDIR/laptop-mode"
-mkdir -p "$CONFDIR/tablet-mode"
 chown -R root:root "$CONFDIR" 
 chmod -R u=rwx,g=rx,o=rx "$CONFDIR"
 
