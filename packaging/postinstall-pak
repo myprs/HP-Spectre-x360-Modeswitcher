@@ -6,7 +6,6 @@ ETCDIR="/etc"
 CONFDIR="$ETCDIR/hp-spectre-x360"
 
 
-pushd . >/dev/null 
 
 cd "$CONFDIR"/laptop-mode
 #ln -s ../script.d/template.sh 00-template 
