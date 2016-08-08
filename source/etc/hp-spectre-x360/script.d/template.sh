@@ -3,8 +3,9 @@
 ## this is a template script for the HP spectre x360 convertible mode switcher
 ## this script just logs the action taken to the syslog faciliy
 
+DEBUG=${DEBUG:-0}
 
-[ -r /etc/default/hp-spectre-x360 ] && source /etc/default/hp-spectre-x360
+[ -r /etc/default/hp-spectre-x360 ] && . /etc/default/hp-spectre-x360
 
 case $1 in 
 	"laptop")

@@ -1,6 +1,9 @@
 #!/bin/bash -xv
 
-[ -r /etc/default/hp-spectre-x360 ] && source /etc/default/hp-spectre-x360
+
+DEBUG=${DEBUG:-0}
+
+[ -r /etc/default/hp-spectre-x360 ] && . /etc/default/hp-spectre-x360
 
 
 
@@ -15,12 +18,14 @@ EOUSAGE
 
 }
 
-
-QUEUEFILE="/var/run/hp-spectre-x360-modewitch.queue"
+# the script must run under the X server so do the management 
+# in the user profile's temp dir
+TMPDIR="/tmp"
+QUEUEFILE="$TMPDIR/$USER.hp-spectre-x360-modewitch.queue"
 QUEUETIMEOUT=5 	# timeout in seconds after that the queue gets fishy and should be reorganised. We assume that the first in queue died and does not leave the queeu.
 		# so we throw away all the queue. Evey provess had to be able to detect if he has been thrown out of the queu and just requeu.
 SLEEPTIME=0.05
-MODEFILE="/var/run/hp-spectre-x360.mode"
+MODEFILE="$TMPDIR/$USER.hp-spectre-x360.mode"
 
 
 function enter_queue () {
@@ -128,7 +133,9 @@ function do_switchmode () {
 	if [ $? -eq 0 ];
 	then	
 		#### yes: do the switch!
-		run-parts --arg="$MODE" /etc/hp-spectre-x360/"$MODE"-mode/
+		local RUN_PARTS_PARAMS=""
+		[ $DEBUG -ge 1 ] && RUN_PARTS_PARAMS="-v"
+		run-parts $RUN_PARTS_PARAMS --arg="$MODE" /etc/hp-spectre-x360/"$MODE"-mode/
 
 		#### yes: set the mode!
 		echo "$MODE">"$MODEFILE"
@@ -141,6 +148,8 @@ function do_switchmode () {
 
 [ -z "$1" ] && { usage; exit 1; }
 MODE="$1"
+
+[ $DEBUG -ge 1 ] && { logger -t "hp-spectre-x360-modeswitcher" "DEBUG: Entering Mode-Switcher with mode \"$1\""; send-notify "HP Spectre x360 Mode Switcher" "DEBUG: initiated mode switching to \"$1\"" ; }
 
 case "$1" in
 	"laptop")

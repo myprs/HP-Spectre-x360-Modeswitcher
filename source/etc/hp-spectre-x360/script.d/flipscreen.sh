@@ -1,14 +1,14 @@
 #!/bin/sh
 
-## this is a script for the HP spectre x360 convertible mode switcher
-## this script flips the screen into the configured orientation in tablet mode
+## This is a script for the HP spectre x360 convertible mode switcher.
+## This script flips the screen into the configured orientation in tablet mode.
 
-
+DEBUG=${DEBUG:-0}
 XRANDR_DISPLAYNAME="eDP1"
 XRANDR_LPTP_ROTATION="normal"
 XRANDR_TBLT_ROTATION="inverted"
 
-[ -r /etc/default/hp-spectre-x360 ] && source /etc/default/hp-spectre-x360
+[ -r /etc/default/hp-spectre-x360 ] && . /etc/default/hp-spectre-x360
 
 
 
