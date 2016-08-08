@@ -1,4 +1,4 @@
-#!/bin/bash -xv
+#!/bin/bash 
 
 
 DEBUG=${DEBUG:-0}
