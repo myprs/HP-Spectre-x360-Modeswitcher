@@ -5,13 +5,13 @@ BINARY="/usr/lib/hp-spectre-x360/hp-spectre-x360-switchmode.sh"
 
 CALLNAME="`basename $0`"
 
-case  "$CALNAME" in
+case  "$CALLNAME" in
 	"hp-mode-laptop")
 		"$BINARY" laptop
 		;;
 	"hp-mode-tablet")
 		"$BINARY" tablet
 		;;
-       	*)	echo "ERROR: This script has to be called by the name of \"hp-mode-tablet\" or \"hp-mode-laptop\". Please make links to the script accordingly."
-		;;	
+	*)	echo "ERROR: This script has to be called by the name of \"hp-mode-tablet\" or \"hp-mode-laptop\". Please make links to the script accordingly."
+		;;
 esac
