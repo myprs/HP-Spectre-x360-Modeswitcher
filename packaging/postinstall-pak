@@ -1,0 +1,31 @@
+#!/bin/sh
+
+
+# location of the instalation target directories
+ETCDIR="/etc"
+CONFDIR="$ETCDIR/hp-spectre-x360"
+
+mkdir -p "$CONFDIR/laptop-mode"
+mkdir -p "$CONFDIR/tablet-mode"
+chown -R root:root "$CONFDIR" 
+chmod -R u=rwx,g=rx,o=rx "$CONFDIR"
+
+cd "$CONFDIR"/laptop-mode
+#ln -s ../script.d/template.sh 00-template 
+ln -s ../script.d/touchpad.sh 01-touchpad 
+ln -s ../script.d/flipscreen.sh 02-flipscreen 
+
+cd "$CONFDIR"/tablet-mode
+#ln -s ../script.d/template.sh 00-template 
+ln -s ../script.d/touchpad.sh 01-touchpad 
+ln -s ../script.d/flipscreen.sh 02-flipscreen 
+
+
+
+
+BINDIR="/usr/bin/"
+MANUALSCRIPT="$BINDIR/hp-spectre-x360-switchmode"
+
+cd "$BINDIR"
+ln -s "$MANUALSCRIPT" hp-mode-laptop
+ln -s "$MANUALSCRIPT" hp-mode-tablet

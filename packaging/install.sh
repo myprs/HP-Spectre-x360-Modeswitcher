@@ -15,6 +15,11 @@ CONFDIR="$ETCDIR/hp-spectre-x360"
 DEFAULTDIR="$ETCDIR/default"
 
 INSTALLDIR="/usr/lib/hp-spectre-x360"
+BINDIR="/usr/bin/"
+MANUALSCRIPT="$BINDIR/hp-spectre-x360-switchmode"
+
+DTOPFILEDIR="/usr/share/applications"
+
 
 pushd . >/dev/null 
 
@@ -30,8 +35,6 @@ function cleanup () {
 echo "DEBUG: create /etc structures"
 
 mkdir -p "$CONFDIR/script.d"
-mkdir -p "$CONFDIR/laptop-mode"
-mkdir -p "$CONFDIR/tablet-mode"
 chown -R root:root "$CONFDIR" 
 chmod -R u=rwx,g=rx,o=rx "$CONFDIR"
 
@@ -42,23 +45,7 @@ cp -r "$SRCDIR$CONFDIR/"* "$CONFDIR/."
 chown root:root "$CONFDIR/script.d/"*  
 chmod u=rwx,g=rw,o=rw "$CONFDIR/script.d/"*  
 
-# make softlinks to the scripts delivered
-echo "DEBUG: make softlinks for laptop mode"
-pushd . >/dev/null 
-
-cd "$CONFDIR"/laptop-mode
-ln -s ../script.d/template.sh 00-template 
-ln -s ../script.d/flipscreen.sh 01-flipscreen 
-ln -s ../script.d/touchpad.sh 01-touchpad 
-
-echo "DEBUG: make softlinks for tablet mode"
-cd "$CONFDIR"/tablet-mode
-ln -s ../script.d/template.sh 00-template 
-ln -s ../script.d/flipscreen.sh 01-flipscreen 
-ln -s ../script.d/touchpad.sh 01-touchpad 
-
-
-popd  >/dev/null 
+# moved creation of softlinks to the scripts into package scripts
 
 # copy sample default conf
 echo "DEBUG: copy sample default conf"
@@ -80,6 +67,18 @@ cp -r "$SRCDIR$INSTALLDIR/"* $INSTALLDIR/.
 chown -R root:root $INSTALLDIR
 chmod -R u=rwx,g=rx,o=rx $INSTALLDIR
 
+
+# install script to directly call the actual script by hand
+echo "DEBUG: install call binary"
+cp -r "$SRCDIR$MANUALSCRIPT" $MANUALSCRIPT
+chown -R root:root $MANUALSCRIPT
+chmod -R u=rwx,g=rx,o=rx $MANUALSCRIPT
+
+# install applications desktop description files
+echo "DEBUG: install desktop files"
+cp -r "$SRCDIR/$DTOPFILEDIR/*" "$DTOPFILEDIR"
+chown  root:root $DTOPFILEDIR/hp-mode-*
+chmod u=rw,g=ro=r $DTOPFILEDIR/hp-mode-*
 
 # run  mode switching script on specific key presses
 echo "DEBUG: install key hooks"

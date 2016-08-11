@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Terminal=false
+Name=hp-mode-laptop
+Icon=/path/to/icon/icon.svg
+Exec=/usr/bin/hp-mode-laptop

@@ -1,10 +1,10 @@
 #!/bin/sh
 
-## this is a touchpad script for the HP spectre x360 convertible mode switcher
-## this script just logs the action taken to the syslog faciliy
+## This is a touchpad script for the HP spectre x360 convertible mode switcher
+## This script switches the touhpad on and off.
 
-
-[ -r /etc/default/hp-spectre-x360 ] && source /etc/default/hp-spectre-x360
+DEBUG=${DEBUG:-0}
+[ -r /etc/default/hp-spectre-x360 ] && .  /etc/default/hp-spectre-x360
 
 
 if [ -z "$TOUCHDEV" ];
@@ -17,9 +17,11 @@ fi
 
 case $1 in 
 	"laptop")
+		[ $DEBUG -ge 1 ] && logger -t "HP-spectre-x360-modeswitch" "Switching to mode \"Laptop\": Setting Touchpad \"$TOUCHDEV\" to --enable ."
 		xinput --enable "$TOUCHDEV"
 	;;
 	"tablet")
+		[ $DEBUG -ge 1 ] && logger -t "HP-spectre-x360-modeswitch" "Switching to mode \"Laptop\": Setting Touchpad \"$TOUCHDEV\" to --disable ."
 		xinput --disable "$TOUCHDEV"
 	;;
 	*)
