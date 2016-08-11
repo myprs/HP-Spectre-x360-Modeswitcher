@@ -20,3 +20,12 @@ cd "$CONFDIR"/tablet-mode
 ln -s ../script.d/touchpad.sh 01-touchpad 
 ln -s ../script.d/flipscreen.sh 02-flipscreen 
 
+
+
+
+BINDIR="/usr/bin/"
+MANUALSCRIPT="$BINDIR/hp-spectre-x360-switchmode"
+
+cd "BINDIR"
+ln -s "$MANUALSCRIPT" hp-mode-laptop
+ln -s "$MANUALSCRIPT" hp-mode-tablet

@@ -20,5 +20,14 @@ rmdir "$CONFDIR"/tablet-mode
 
 
 
+
+BINDIR="/usr/bin/"
+MANUALSCRIPT="$BINDIR/hp-spectre-x360-switchmode"
+
+cd "BINDIR"
+rm hp-mode-laptop
+rm hp-mode-tablet
+
+
 exit 0
 

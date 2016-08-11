@@ -15,6 +15,8 @@ CONFDIR="$ETCDIR/hp-spectre-x360"
 DEFAULTDIR="$ETCDIR/default"
 
 INSTALLDIR="/usr/lib/hp-spectre-x360"
+BINDIR="/usr/bin/"
+MANUALSCRIPT="$BINDIR/hp-spectre-x360-switchmode"
 
 pushd . >/dev/null 
 
@@ -61,6 +63,14 @@ mkdir "$INSTALLDIR"
 cp -r "$SRCDIR$INSTALLDIR/"* $INSTALLDIR/.
 chown -R root:root $INSTALLDIR
 chmod -R u=rwx,g=rx,o=rx $INSTALLDIR
+
+
+# install script to directly call the actual script by hand
+echo "DEBUG: install call binary"
+cp -r "$SRCDIR$MANUALSCRIPT" $BINDIR/$MANUALSCRIPT
+chown -R root:root $MANUALSCRIPT
+chmod -R u=rwx,g=rx,o=rx $MANUALSCRIPT
+
 
 
 # run  mode switching script on specific key presses
