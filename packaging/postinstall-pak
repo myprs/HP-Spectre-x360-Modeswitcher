@@ -26,6 +26,6 @@ ln -s ../script.d/flipscreen.sh 02-flipscreen
 BINDIR="/usr/bin/"
 MANUALSCRIPT="$BINDIR/hp-spectre-x360-switchmode"
 
-cd "BINDIR"
+cd "$BINDIR"
 ln -s "$MANUALSCRIPT" hp-mode-laptop
 ln -s "$MANUALSCRIPT" hp-mode-tablet

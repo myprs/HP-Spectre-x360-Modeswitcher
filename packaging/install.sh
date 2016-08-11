@@ -18,6 +18,9 @@ INSTALLDIR="/usr/lib/hp-spectre-x360"
 BINDIR="/usr/bin/"
 MANUALSCRIPT="$BINDIR/hp-spectre-x360-switchmode"
 
+DTOPFILEDIR="/usr/share/applications"
+
+
 pushd . >/dev/null 
 
 cd "$PACKDIR"
@@ -67,11 +70,15 @@ chmod -R u=rwx,g=rx,o=rx $INSTALLDIR
 
 # install script to directly call the actual script by hand
 echo "DEBUG: install call binary"
-cp -r "$SRCDIR$MANUALSCRIPT" $BINDIR/$MANUALSCRIPT
+cp -r "$SRCDIR$MANUALSCRIPT" $MANUALSCRIPT
 chown -R root:root $MANUALSCRIPT
 chmod -R u=rwx,g=rx,o=rx $MANUALSCRIPT
 
-
+# install applications desktop description files
+echo "DEBUG: install desktop files"
+cp -r "$SRCDIR/$DTOPFILEDIR/*" "$DTOPFILEDIR"
+chown  root:root $DTOPFILEDIR/hp-mode-*
+chmod u=rw,g=ro=r $DTOPFILEDIR/hp-mode-*
 
 # run  mode switching script on specific key presses
 echo "DEBUG: install key hooks"
